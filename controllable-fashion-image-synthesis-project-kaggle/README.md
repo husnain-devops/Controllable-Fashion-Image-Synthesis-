@@ -34,6 +34,14 @@ This package contains **3 complete training notebooks** with different configura
    - Inference: 20 denoising steps
    - Quick training option for testing
 
+### Pre-trained Weights
+
+**Pre-trained LoRA weights are available for inference:**
+- **Location:** `../assets/weights/Model_weights_for_inference-Kaggle.rar`
+- **Format:** RAR archive containing LoRA weights
+- **Usage:** Extract and use for inference without training
+- **Note:** These weights can be used directly in inference notebooks
+
 ---
 
 ## 📋 Prerequisites
@@ -50,6 +58,26 @@ This package contains **3 complete training notebooks** with different configura
 ---
 
 ## 🚀 Quick Start on Kaggle
+
+### Option A: Using Pre-trained Weights (Inference Only)
+
+**Skip training and go directly to inference!**
+
+1. **Download Pre-trained Weights**
+   - Download `Model_weights_for_inference-Kaggle.rar` from `../assets/weights/`
+   - Upload to Kaggle as a dataset or extract in your notebook
+
+2. **Create Inference Notebook**
+   - Create a new Kaggle notebook
+   - Load the pre-trained weights
+   - Start generating images immediately
+
+3. **Benefits:**
+   - No training time required
+   - Immediate image generation
+   - Perfect for testing and experimentation
+
+### Option B: Training from Scratch
 
 ### 1. Upload Dataset
 
@@ -260,6 +288,19 @@ After running a notebook, you'll get:
 
 6. **Zipped Results** (`final_evaluation_results.zip`)
    - All outputs packaged for download
+
+### Using Pre-trained Weights
+
+If you're using the pre-trained weights from `../assets/weights/Model_weights_for_inference-Kaggle.rar`:
+
+1. **Extract the RAR file** to get the LoRA weights
+2. **Upload to Kaggle** as a dataset or extract in your notebook
+3. **Load in your inference notebook:**
+   ```python
+   pipe.load_lora_weights("path/to/extracted/weights", 
+                          weight_name="pytorch_lora_weights.safetensors")
+   ```
+4. **Start generating** images immediately without training!
 
 ---
 

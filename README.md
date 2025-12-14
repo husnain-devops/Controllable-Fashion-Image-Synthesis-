@@ -21,8 +21,40 @@ This project implements a state-of-the-art controllable image synthesis system t
 ✅ **Multiple Interfaces** - GUI, CLI, and programmatic APIs  
 ✅ **Comprehensive Evaluation** - Full metric suite for quality assessment  
 ✅ **Cross-Platform** - Works on AMD (ROCm) and NVIDIA (CUDA) GPUs  
+✅ **Pre-trained Weights** - Ready-to-use weights available for immediate inference  
 
 ---
+
+## 🎨 Example Outputs
+
+The system generates high-quality fashion images that:
+- Match the structure of reference images
+- Follow text descriptions accurately
+- Maintain fashion domain characteristics
+- Preserve fine details and textures
+
+### Sample Batch Generation
+
+The following example demonstrates the system's ability to generate diverse fashion items from a single reference image using different text prompts:
+
+![Batch Generation Example](assets/images/batch_generation_example.png)
+
+**What this shows:**
+- **Top Left:** Reference image with a model in a navy shirt
+- **Top Right:** Extracted Canny edge structure (pose and silhouette)
+- **Bottom 6 panels:** Generated fashion items using different text prompts:
+  - Classic black leather jacket
+  - Blue wool hood
+  - Sleeveless green cotton T-shirt
+  - Brown bomber jacket
+  - Red Christmas sweater
+  - Purple silky sleeping gown
+
+All generated images maintain the same pose and structure from the reference while accurately following the text descriptions.
+
+---
+
+
 
 ## 🏗️ Architecture
 
@@ -80,6 +112,12 @@ This project implements a state-of-the-art controllable image synthesis system t
 controllable-fashion-image-synthesis-project/
 │
 ├── README.md                          # This file - Project overview
+│
+├── assets/                             # Project assets
+│   ├── images/                        # Sample output images
+│   │   └── batch_generation_example.png
+│   └── weights/                       # Pre-trained model weights
+│       └── Model_weights_for_inference-Kaggle.rar
 │
 ├── controllable-fashion-image-synthesis-project-AMD/
 │   ├── README.md                      # AMD-specific documentation
@@ -153,7 +191,15 @@ jupyter notebook
 - Sharing and collaboration
 - Limited compute resources
 
-**Quick Start:**
+**Quick Start Options:**
+
+**Option A: Using Pre-trained Weights (Recommended for Quick Start)**
+1. Download pre-trained weights from `assets/weights/Model_weights_for_inference-Kaggle.rar`
+2. Upload to Kaggle as a dataset
+3. Create an inference notebook
+4. Load weights and start generating immediately!
+
+**Option B: Training from Scratch**
 1. Upload FashionGen dataset to Kaggle
 2. Upload one of the Kaggle notebooks
 3. Enable GPU in notebook settings
@@ -387,13 +433,52 @@ image = pipe(
 - [ ] Run evaluation notebook
 - [ ] Use GUI/CLI apps for generation
 
-### For Kaggle Version:
+### For Kaggle Version (Training):
 - [ ] Create Kaggle account
 - [ ] Upload FashionGen dataset
 - [ ] Upload notebook to Kaggle
 - [ ] Enable GPU in settings
 - [ ] Run all cells
 - [ ] Download results
+
+### For Kaggle Version (Inference with Pre-trained Weights):
+- [ ] Create Kaggle account
+- [ ] Download `Model_weights_for_inference-Kaggle.rar` from `assets/weights/`
+- [ ] Upload weights to Kaggle as a dataset
+- [ ] Create inference notebook
+- [ ] Load pre-trained weights
+- [ ] Start generating images immediately!
+
+---
+
+## 📦 Pre-trained Weights
+
+### Kaggle Inference Weights
+
+**Pre-trained LoRA weights are available for immediate inference:**
+
+- **Location:** `assets/weights/Model_weights_for_inference-Kaggle.rar`
+- **Format:** RAR archive containing LoRA weights
+- **Size:** ~3-5 MB (compressed)
+- **Usage:** Extract and use for inference without training
+- **Platform:** Optimized for Kaggle GPU environments
+
+**How to Use:**
+1. Download the RAR file from `assets/weights/`
+2. Extract the LoRA weights
+3. Upload to Kaggle as a dataset or extract in your notebook
+4. Load in your inference code:
+   ```python
+   pipe.load_lora_weights("path/to/weights", 
+                          weight_name="pytorch_lora_weights.safetensors")
+   ```
+5. Start generating fashion images immediately!
+
+**Benefits:**
+- ✅ Skip training time (save hours)
+- ✅ Immediate image generation
+- ✅ Perfect for testing and experimentation
+- ✅ Same quality as trained models
 
 ---
 
@@ -544,50 +629,6 @@ This is a research project. Contributions welcome:
 - [ ] Real-time inference optimization
 - [ ] Additional evaluation metrics
 - [ ] Web-based interface
-
----
-
-## 📖 Citation
-
-If you use this project in your research, please cite:
-
-```bibtex
-@software{controllable_fashion_synthesis,
-  title={Controllable Fashion Image Synthesis with Stable Diffusion, ControlNet, and LoRA},
-  author={Your Name},
-  year={2024},
-  url={https://github.com/your-repo}
-}
-```
-
----
-
-## 🎨 Example Outputs
-
-The system generates high-quality fashion images that:
-- Match the structure of reference images
-- Follow text descriptions accurately
-- Maintain fashion domain characteristics
-- Preserve fine details and textures
-
-### Sample Batch Generation
-
-The following example demonstrates the system's ability to generate diverse fashion items from a single reference image using different text prompts:
-
-![Batch Generation Example](assets/images/batch_generation_example.png)
-
-**What this shows:**
-- **Top Left:** Reference image with a model in a navy shirt
-- **Top Right:** Extracted Canny edge structure (pose and silhouette)
-- **Bottom 6 panels:** Generated fashion items using different text prompts:
-  - Classic black leather jacket
-  - Blue wool hood
-  - Sleeveless green cotton T-shirt
-  - Brown bomber jacket
-  - Red Christmas sweater
-  - Purple silky sleeping gown
-
-All generated images maintain the same pose and structure from the reference while accurately following the text descriptions.
 
 ---
 
