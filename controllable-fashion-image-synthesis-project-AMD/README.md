@@ -322,8 +322,57 @@ To change paths, update the `WORKING_DIR` variable in each notebook's Cell 2.
 
 - **Base Model:** `runwayml/stable-diffusion-v1-5`
 - **ControlNet:** `lllyasviel/control_v11p_sd15_canny`
-- **LoRA Rank:** 16 (default, configurable)
-- **Precision:** FP16 (mixed precision) for AMD GPUs
+- **LoRA Rank:** 4 (default from training script)
+- **Precision:** FP32 (full precision) for AMD GPUs (ROCm compatibility)
+
+### Training Parameters
+
+The model was trained with the following specifications (from `controllable-fashion-image-synthesis-v1.ipynb`):
+
+#### Hyperparameters
+- **Learning Rate:** `1e-04` (0.0001)
+- **Max Training Steps:** `5000`
+- **Batch Size:** `2` (per GPU)
+- **Gradient Accumulation Steps:** `2` (effective batch size: 4)
+- **Learning Rate Scheduler:** `cosine`
+- **Learning Rate Warmup Steps:** `500`
+- **Max Gradient Norm:** `1.0` (gradient clipping)
+- **Mixed Precision:** `no` (FP32 - required for ROCm stability)
+
+#### Model Architecture
+- **LoRA Rank:** `4` (default, not explicitly set in training command)
+- **LoRA Alpha:** `4` (typically equals rank)
+- **Image Resolution:** `256x256`
+- **Random Flip:** Enabled (data augmentation)
+
+#### Training Configuration
+- **Checkpointing Steps:** `1000` (saves checkpoint every 1000 steps)
+- **Random Seed:** `42` (for reproducibility)
+- **Report To:** `tensorboard` (training logs)
+- **Training Data:** `./working/fashion_train` (100,000 samples)
+- **Output Directory:** `./working/fashion_lora_output`
+
+#### Evaluation Specifications
+
+From `controllable-fashion-image-synthesis-v1-evaluation.ipynb`:
+
+- **Evaluation Dataset Size:** `10,000` samples
+- **Evaluation Metrics:**
+  - **FID (Fréchet Inception Distance):** Image quality assessment
+  - **KID (Kernel Inception Distance):** Image diversity measurement
+  - **LPIPS (Learned Perceptual Image Patch Similarity):** Perceptual similarity
+  - **CLIP Score:** Text-image alignment
+- **Evaluation Data Structure:**
+  - Ground truth images: `./working/eval_data/gt/`
+  - Baseline outputs: `./working/eval_data/baseline/`
+  - LoRA outputs: `./working/eval_data/lora/`
+  - Evaluation configs: `./working/eval_data/eval_configs.json`
+
+#### Hardware Specifications
+- **GPU:** AMD Instinct MI250X/MI250 (8 GPUs used for training)
+- **ROCm Version:** 6.2
+- **PyTorch Version:** 2.5.1+rocm6.2
+- **Training Time:** ~28 minutes for 5000 steps (on 8x MI250X GPUs)
 
 ---
 
