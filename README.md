@@ -570,6 +570,25 @@ The system generates high-quality fashion images that:
 - Maintain fashion domain characteristics
 - Preserve fine details and textures
 
+### Sample Batch Generation
+
+The following example demonstrates the system's ability to generate diverse fashion items from a single reference image using different text prompts:
+
+![Batch Generation Example](assets/images/batch_generation_example.png)
+
+**What this shows:**
+- **Top Left:** Reference image with a model in a navy shirt
+- **Top Right:** Extracted Canny edge structure (pose and silhouette)
+- **Bottom 6 panels:** Generated fashion items using different text prompts:
+  - Classic black leather jacket
+  - Blue wool hood
+  - Sleeveless green cotton T-shirt
+  - Brown bomber jacket
+  - Red Christmas sweater
+  - Purple silky sleeping gown
+
+All generated images maintain the same pose and structure from the reference while accurately following the text descriptions.
+
 ---
 
 **Happy Generating! 🎨✨**
