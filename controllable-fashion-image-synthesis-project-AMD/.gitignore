@@ -12,9 +12,9 @@ ENV/
 # Jupyter Notebook
 .ipynb_checkpoints
 *.ipynb_checkpoints/
-
+working/fashion_lora_output/checkpoint*
 # Model files (too large for git)
-*.safetensors
+#*.safetensors
 *.ckpt
 *.pt
 *.pth
